@@ -2,10 +2,18 @@ package com.zipcodewilmington.bakery.services;
 
 import com.zipcodewilmington.bakery.models.Muffin;
 import com.zipcodewilmington.bakery.repositories.MuffinRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
+@Service
 public class MuffinService {
-    private MuffinRepository repository;
 
+    private MuffinRepository repository;
+    @Autowired
     public MuffinService(MuffinRepository repository) {
         this.repository = repository;
     }
@@ -14,13 +22,16 @@ public class MuffinService {
         return repository.findAll();
     }
 
+
     public Muffin show(Long id) {
         return repository.findById(id).get();
     }
 
+
     public Muffin create(Muffin baker) {
         return repository.save(baker);
     }
+
 
     public Muffin update(Long id, Muffin newMuffinData) {
         Muffin originalMuffin = repository.findById(id).get();
